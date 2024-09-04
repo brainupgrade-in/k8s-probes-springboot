@@ -1,6 +1,6 @@
 {
   "name": "Spring Boot Dev Container",
-  "image": "mcr.microsoft.com/vscode/devcontainers/java:0-17",
+  "image": "ghcr.io/devcontainers/java:17",
   "features": {
     "ghcr.io/devcontainers/features/maven:1": {}
   },
@@ -10,10 +10,11 @@
         "terminal.integrated.shell.linux": "/bin/bash"
       },
       "extensions": [
-        "vscjava.vscode-maven"
+        "vscjava.vscode-maven",
+        "vscjava.vscode-spring-boot",
+        "redhat.java"
       ]
     }
   },
-  // "postCreateCommand": "mvn clean install",
   "remoteUser": "vscode"
 }
