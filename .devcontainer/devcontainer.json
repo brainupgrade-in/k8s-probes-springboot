@@ -1,21 +1,26 @@
 {
-  "name": "Spring Boot Dev Container",
-  "image": "mcr.microsoft.com/vscode/devcontainers/java:0-11",
+  "name": "Java 17 Spring Dev Container",
+  "image": "mcr.microsoft.com/devcontainers/java:17-bullseye",
   "features": {
-    "ghcr.io/devcontainers/features/maven:1": {}
+      "ghcr.io/devcontainers/features/java:1": {
+        "version": "11",
+        "installGradle": "false",
+        "installMaven": "true"
+    },
+    "docker-in-docker": "latest"
   },
   "customizations": {
     "vscode": {
-      "settings": {
-        "terminal.integrated.shell.linux": "/bin/bash"
-      },
       "extensions": [
         "vscjava.vscode-java-pack",
-        "pivotal.vscode-spring-boot",
-        "vscjava.vscode-maven"
-      ]
+        "pivotal.vscode-spring-boot"
+      ],
+      "settings": {
+        "java.jdt.ls.java.home": "/usr/local/sdkman/candidates/java/current"
+      }
     }
   },
-  "postCreateCommand": "mvn clean install",
+  "forwardPorts": [8080],
+  // "postCreateCommand": "mvn clean install",
   "remoteUser": "vscode"
 }
