@@ -1,20 +1,29 @@
 {
-  "name": "Spring Boot Dev Container",
-  "image": "ghcr.io/devcontainers/java:17",
+  "name": "Java 17 Development Container",
+  "image": "mcr.microsoft.com/vscode/devcontainers/java:0-17",
   "features": {
     "ghcr.io/devcontainers/features/maven:1": {}
   },
   "customizations": {
     "vscode": {
       "settings": {
-        "terminal.integrated.shell.linux": "/bin/bash"
+        "java.jdt.ls.java.home": "/usr/local/openjdk-17",
+        "java.configuration.runtimes": [
+          {
+            "name": "JavaSE-17",
+            "path": "/usr/local/openjdk-17",
+            "default": true
+          }
+        ]
       },
       "extensions": [
+        "vscjava.vscode-java-pack",
         "vscjava.vscode-maven",
         "vscjava.vscode-spring-boot",
         "redhat.java"
       ]
     }
   },
+  // "postCreateCommand": "mvn clean install",
   "remoteUser": "vscode"
 }
