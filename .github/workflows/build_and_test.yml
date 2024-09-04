@@ -1,0 +1,41 @@
+name: Build and Test Spring Boot App
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+
+    - name: Build with Maven
+      run: mvn clean package
+
+    - name: Run the application
+      run: java -jar target/app.jar &
+      env:
+        SPRING_PROFILES_ACTIVE: test
+
+    - name: Wait for the application to start
+      run: sleep 30
+
+    - name: Test /actuator/health endpoint
+      run: |
+        sudo apt-get install -y jq
+        response=$(curl -s http://localhost:8080/actuator/health)
+        echo "Response: $response"
+        echo $response | jq -e '.status == "DOWN"' > /dev/null
