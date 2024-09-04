@@ -10,8 +10,6 @@
         "terminal.integrated.shell.linux": "/bin/bash"
       },
       "extensions": [
-        "vscjava.vscode-java-pack",
-        "pivotal.vscode-spring-boot",
         "vscjava.vscode-maven"
       ]
     }
